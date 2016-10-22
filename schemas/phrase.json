@@ -2,186 +2,31 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "phrase setting",
   "type": "object",
-  "patternProperties": {
+  "patternProperties":
+  {
     "description": "a named group of phrases",
-    ".*": {
+    ".*":
+    {
       "type": "object",
-      "properties": {
-        "target": {
-          "title": "single string or multiple strings",
-          "oneOf": [
-            {
-              "title": "one string",
-              "type": "string"
-            },
-            {
-              "title": "array of strings",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
+      "properties":
+      {
+        "target":
+        {
+          "description": "the image pattern or list/json file basename to be embedded with",
+          "$ref": "common/strings.json"
         },
-        "rank": {
-          "description": "describe factors how an item will be selected",
-          "type": "object",
-          "properties": {
-            "kind": {
-              "type": {
-                "enum": [
-                  "WEIGHT",
-                  "PERCENTAGE"
-                ]
-              }
-            },
-            "value": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "period": {
-              "type": "string",
-              "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
-            }
-          }
-        },
-        "sentence": {
-          "oneOf": [
-            {
-              "title": "one sentence",
-              "type": "string"
-            },
-            {
-              "title": "sentences",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 1,
-              "uniqueItems": true
-            },
-            {
-              "title": "unresolved sentences",
-              "type": "object",
-              "description": "sentences with rank or unresolved words by var(attribute_name)",
-              "patternProperties": {
-                ".*": {
-                  "type": "object",
-                  "properties": {
-                    "rank": {
-                      "description": "describe factors how an item will be selected",
-                      "type": "object",
-                      "properties": {
-                        "kind": {
-                          "type": {
-                            "enum": [
-                              "WEIGHT",
-                              "PERCENTAGE"
-                            ]
-                          }
-                        },
-                        "value": {
-                          "type": "integer",
-                          "minimum": 1
-                        },
-                        "period": {
-                          "type": "string",
-                          "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
-                        }
-                      }
-                    },
-                    "default_value": {
-                      "description": "default value of 'attribute names'",
-                      "type": "object",
-                      "patternProperties": {
-                        ".*": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "restrict": {
-                      "description": "one of the patterns from 'target'",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "restrict": {
+        "rank": {"$ref": "common/rank.json"},
+        "sentence": {"$ref": "common/sentences.json"},
+        "restrict":
+        {
           "description": "a subset pattern of 'target'",
-          "patternProperties": {
-            ".*": {
-              "oneOf": [
-                {
-                  "title": "one sentence",
-                  "type": "string"
-                },
-                {
-                  "title": "sentences",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "minItems": 1,
-                  "uniqueItems": true
-                },
-                {
-                  "title": "unresolved sentences",
-                  "type": "object",
-                  "description": "sentences with rank or unresolved words by var(attribute_name)",
-                  "patternProperties": {
-                    ".*": {
-                      "type": "object",
-                      "properties": {
-                        "rank": {
-                          "description": "describe factors how an item will be selected",
-                          "type": "object",
-                          "properties": {
-                            "kind": {
-                              "type": {
-                                "enum": [
-                                  "WEIGHT",
-                                  "PERCENTAGE"
-                                ]
-                              }
-                            },
-                            "value": {
-                              "type": "integer",
-                              "minimum": 1
-                            },
-                            "period": {
-                              "type": "string",
-                              "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
-                            }
-                          }
-                        },
-                        "default_value": {
-                          "description": "default value of 'attribute names'",
-                          "type": "object",
-                          "patternProperties": {
-                            ".*": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "restrict": {
-                          "description": "one of the patterns from 'target'",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
+          "patternProperties":
+          {
+            ".*": {"$ref": "common/sentences.json"}
           }
         }
       },
-      "required": [
-        "target"
-      ]
+      "required": ["target"]
     }
   }
 }

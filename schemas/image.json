@@ -2,95 +2,42 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "image setting",
   "type": "object",
-  "properties": {
-    "size": {
+  "properties":
+  {
+    "size":
+    {
       "type": "array",
-      "items": {
-        "type": {
-          "enum": [
-            "xlarge",
-            "xxlarge",
-            "huge"
-          ]
-        }
+      "items":
+      {
+        "type": {"enum": ["xlarge", "xxlarge", "huge"]}
       },
       "minItems": 1,
       "uniqueItems": true
     },
-    "rank": {
-      "description": "describe factors how an item will be selected",
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": {
-            "enum": [
-              "WEIGHT",
-              "PERCENTAGE"
-            ]
-          }
-        },
-        "value": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "period": {
-          "type": "string",
-          "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
-        }
-      }
-    },
-    "image": {
+    "rank": {"$ref": "common/rank.json"},
+    "image":
+    {
       "description": "any pattern represents the pictures",
       "type": "object",
-      "patternProperties": {
-        ".*": {
+      "patternProperties":
+      {
+        ".*":
+        {
           "type": "object",
-          "properties": {
-            "rank": {
-              "description": "describe factors how an item will be selected",
-              "type": "object",
-              "properties": {
-                "kind": {
-                  "type": {
-                    "enum": [
-                      "WEIGHT",
-                      "PERCENTAGE"
-                    ]
-                  }
-                },
-                "value": {
-                  "type": "integer",
-                  "minimum": 1
-                },
-                "period": {
-                  "type": "string",
-                  "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
-                }
-              }
-            },
-            "attribute": {
+          "properties":
+          {
+            "rank": {"$ref": "common/rank.json"},
+            "attribute":
+            {
               "description": "any phrase relates to the pattern",
               "type": "object",
-              "patternProperties": {
-                ".*": {
-                  "title": "single string or multiple strings",
-                  "oneOf": [
-                    {
-                      "title": "one string",
-                      "type": "string"
-                    },
-                    {
-                      "title": "array of strings",
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  ]
-                }
+              "patternProperties":
+              {
+                ".*": {"$ref": "common/strings.json"}
               }
             },
-            "location": {
+            "location":
+            {
               "description": "a directory with jpg/jpeg pictures",
               "type": "string"
             }
@@ -99,7 +46,5 @@
       }
     }
   },
-  "required": [
-    "image"
-  ]
+  "required": ["image"]
 }
