@@ -1,1 +1,31 @@
+include templates/mixins/indexFolders
 
+doctype html
+head
+  include templates/includes/css
+html
+  body.index
+    article
+      header
+        h1 iReminder json documentation
+
+        p
+          | Check each possible entries one may specify, and find out
+          | how iReminder reacts to each of them
+
+      section
+        h2 Documentation
+
+        ul
+          each file, name in files
+            if typeof file === 'string'
+              li
+                a(href=name)= name
+
+        each folder, name in files
+          if typeof folder === 'object'
+            h2= name
+            ul
+              mixin indexFolders(folder, 3)
+
+      include templates/includes/footer
