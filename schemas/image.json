@@ -4,10 +4,15 @@
   "type": "object",
   "properties": {
     "size": {
+      "description": "target size of the image",
       "type": "array",
       "items": {
         "type": {
           "enum": [
+            "icon",
+            "small",
+            "medium",
+            "large",
             "xlarge",
             "xxlarge",
             "huge"
@@ -34,8 +39,10 @@
           "minimum": 1
         },
         "period": {
+          "description": "restrict the hours an item can appear, format: hhmm-hhmm",
+          "example": "0900-1600",
           "type": "string",
-          "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
+          "pattern": "^[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]$"
         }
       }
     },
@@ -63,8 +70,10 @@
                   "minimum": 1
                 },
                 "period": {
+                  "description": "restrict the hours an item can appear, format: hhmm-hhmm",
+                  "example": "0900-1600",
                   "type": "string",
-                  "pattern": "[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]"
+                  "pattern": "^[0-2][0-9][0-5][0-9]-[0-2][0-9][0-5][0-9]$"
                 }
               }
             },
